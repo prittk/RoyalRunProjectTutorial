@@ -438,7 +438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59d76547c618ef43b158ac6abdc2291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 1326752770537645442, guid: a2f5d8da70174eb428b2ccdb3528984b, type: 3}
+  obstacle:
+  - {fileID: 8377231723454898290, guid: 3f92b39e513730548816425e7e0fb9f1, type: 3}
+  - {fileID: 1326752770537645442, guid: a2f5d8da70174eb428b2ccdb3528984b, type: 3}
   obstacleGroup: {fileID: 1752718610}
 --- !u!4 &477579236
 Transform:
@@ -449,7 +451,7 @@ Transform:
   m_GameObject: {fileID: 477579234}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.53871, y: 0, z: -0.86356}
+  m_LocalPosition: {x: 0, y: 5, z: -0.86356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

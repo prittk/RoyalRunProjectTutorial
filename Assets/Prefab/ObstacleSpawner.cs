@@ -1,26 +1,46 @@
 using UnityEngine;
 using System.Collections;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 public class ObstacleSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] GameObject obstacle;
+    [SerializeField] GameObject[] obstacle = new GameObject[2];
     [SerializeField] Transform obstacleGroup;
 
-    int maxSpawnedObstacles = 10;
 
-    float spawnInterval = 1f;
+
+    float spawnInterval = 3f;
 
     void Start()
     {
         StartCoroutine(SpawnObstacles());
     }
 
+    private void Update() 
+    {
+        DeleteObstacle();
+    }
+
     IEnumerator SpawnObstacles()
     {
-        while (obstacleGroup.childCount < maxSpawnedObstacles)
+        while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
-            Instantiate(obstacle, new Vector3(Random.Range(-4.25f, 4.25f), 1f, Random.Range(10f,20f)), Quaternion.identity,obstacleGroup);
+            //spawn objects with a random x with the floor width, the y of the spawner, and the z of the lenght of the floorpath
+            Instantiate(obstacle[Random.Range(0, obstacle.Length)], new Vector3(Random.Range(-4.25f, 4.25f), transform.position.y, Random.Range(50f,90f)), Random.rotation,obstacleGroup);
         }
+    }
+
+    private void DeleteObstacle()
+    {
+        foreach(Transform obstacle in obstacleGroup)
+        {
+            if (obstacle.position.z < Camera.main.transform.position.z - 10f || obstacle.position.y < -2f)
+            {
+                Destroy(obstacle.gameObject);
+            }
+        }
+        
     }
 }
