@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 public class ObstacleSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] GameObject[] obstacle = new GameObject[2];
+    [SerializeField] GameObject[] obstacle;
     [SerializeField] Transform obstacleGroup;
 
 

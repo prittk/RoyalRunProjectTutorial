@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacle:
   - {fileID: 8377231723454898290, guid: 3f92b39e513730548816425e7e0fb9f1, type: 3}
-  - {fileID: 1326752770537645442, guid: a2f5d8da70174eb428b2ccdb3528984b, type: 3}
+  - {fileID: 6162534232683537488, guid: 1a70795f2539d3b4dadbb6ff09be274b, type: 3}
   obstacleGroup: {fileID: 1752718610}
 --- !u!4 &477579236
 Transform:
