@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 5459685127335756958}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: -0.49, z: 0.75}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -196,6 +196,8 @@ MonoBehaviour:
   - -1.25
   - 2
   fencePrefab: {fileID: 2756826712474636186, guid: 0e7e6d4ef947b9c46b8d31ef232986e1, type: 3}
+  applePrefab: {fileID: 6555552391598302988, guid: 44b07fb52fea300429f2a284dacb781d, type: 3}
+  coinPrefab: {fileID: 3122326950749988394, guid: 6a8011e217b095d4fb5c83a76e8e5b26, type: 3}
 --- !u!1001 &392665407904279762
 PrefabInstance:
   m_ObjectHideFlags: 0

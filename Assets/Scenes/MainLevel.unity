@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.036
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -25,8 +25,8 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubtractiveShadowColor: {r: 0.60648793, g: 0.6404295, b: 0.7264149, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 54fe2f000ad8f424fb63cc3ea0ae2bb2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 477579236}
-  - component: {fileID: 477579235}
+  - component: {fileID: 477579237}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
@@ -426,22 +426,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &477579235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477579234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59d76547c618ef43b158ac6abdc2291, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacle:
-  - {fileID: 8377231723454898290, guid: 3f92b39e513730548816425e7e0fb9f1, type: 3}
-  - {fileID: 6162534232683537488, guid: 1a70795f2539d3b4dadbb6ff09be274b, type: 3}
-  obstacleGroup: {fileID: 1752718610}
 --- !u!4 &477579236
 Transform:
   m_ObjectHideFlags: 0
@@ -457,6 +441,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &477579237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 477579234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59d76547c618ef43b158ac6abdc2291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacle:
+  - {fileID: 6162534232683537488, guid: 1a70795f2539d3b4dadbb6ff09be274b, type: 3}
+  - {fileID: 6276075877986033535, guid: fb05ebac6f24da54da169c262c3f75e0, type: 3}
+  - {fileID: 8377231723454898290, guid: 3f92b39e513730548816425e7e0fb9f1, type: 3}
+  - {fileID: 7165074252992230592, guid: 9709930d557060741b2175a670685fce, type: 3}
+  - {fileID: 8754907431993606971, guid: 41b51d6cf3c17434a9a876a072dc574a, type: 3}
+  obstacleGroup: {fileID: 1752718610}
 --- !u!1 &550579550
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1392612826}
   - component: {fileID: 1392612825}
+  - component: {fileID: 1392612827}
   m_Layer: 0
   m_Name: FloorGen
   m_TagString: Untagged
@@ -765,6 +769,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392612827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392612824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88bec6bc65eb84646908a8cec1f0dd3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanes:
+  - -4.5
+  - -1.25
+  - 2
+  fencePrefab: {fileID: 2756826712474636186, guid: 0e7e6d4ef947b9c46b8d31ef232986e1, type: 3}
+  pickupPrefab: {fileID: 6555552391598302988, guid: 44b07fb52fea300429f2a284dacb781d, type: 3}
 --- !u!4 &1696989924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6410221756858730007, guid: dcbc89efbe5bd174b99e07c76bd0b6bf, type: 3}
