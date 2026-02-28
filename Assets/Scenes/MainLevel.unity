@@ -472,9 +472,11 @@ GameObject:
   - component: {fileID: 550579554}
   - component: {fileID: 550579553}
   - component: {fileID: 550579552}
+  - component: {fileID: 550579555}
+  - component: {fileID: 550579556}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -579,10 +581,89 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 36
   m_CollisionDetection: 0
+--- !u!136 &550579555
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550579550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.38
+  m_Height: 2.5158546
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7579273, z: 0}
+--- !u!114 &550579556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550579550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4a2afffd7ce2c4fbca7c66acb39536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &725913694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 725913696}
+  - component: {fileID: 725913695}
+  m_Layer: 0
+  m_Name: PlayerCollison
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &725913695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725913694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4a2afffd7ce2c4fbca7c66acb39536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &725913696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725913694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.91528, y: 0, z: -0.19656}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &814383645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -730,7 +811,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1392612826}
   - component: {fileID: 1392612825}
-  - component: {fileID: 1392612827}
   m_Layer: 0
   m_Name: FloorGen
   m_TagString: Untagged
@@ -751,8 +831,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorPrefab: {fileID: 8921177842557080397, guid: 806f34fcb682f4b4a9d6b8c0ea17aae2, type: 3}
-  floorAmount: 10
-  floorParent: {fileID: 1054558148}
+  floorAmount: 12
+  floorParent: {fileID: 477579236}
   moveSpeed: 10
 --- !u!4 &1392612826
 Transform:
@@ -769,24 +849,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1392612827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392612824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bec6bc65eb84646908a8cec1f0dd3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lanes:
-  - -4.5
-  - -1.25
-  - 2
-  fencePrefab: {fileID: 2756826712474636186, guid: 0e7e6d4ef947b9c46b8d31ef232986e1, type: 3}
-  pickupPrefab: {fileID: 6555552391598302988, guid: 44b07fb52fea300429f2a284dacb781d, type: 3}
 --- !u!4 &1696989924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6410221756858730007, guid: dcbc89efbe5bd174b99e07c76bd0b6bf, type: 3}
@@ -831,6 +893,7 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 550579551}
+  - {fileID: 725913696}
   - {fileID: 1392612826}
   - {fileID: 1054558148}
   - {fileID: 477579236}
