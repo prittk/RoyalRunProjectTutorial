@@ -10,6 +10,10 @@ public class FloorGen : MonoBehaviour
 
     [SerializeField] Transform floorParent; //parent to keep all instantiated floors in a single object parent
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float minMoveSpeed = 5f;
+    [SerializeField] float maxMoveSpeed = 15f;
+
+
 
     List<GameObject> floorList = new List<GameObject>();
 
@@ -25,6 +29,31 @@ public class FloorGen : MonoBehaviour
     void Update()
     {
         MoveFloor();
+    }
+
+
+    public void changeMoveSpeed(float newSpeed)
+    {
+        moveSpeed += newSpeed;
+        
+        if (moveSpeed < minMoveSpeed)
+        {
+            moveSpeed = minMoveSpeed;
+            newSpeed = 0f;
+        }
+        else if (moveSpeed > maxMoveSpeed)
+        {
+            moveSpeed = maxMoveSpeed;
+            newSpeed = 0f;
+        }
+        adjustGravity(newSpeed);
+
+    }
+
+    public void adjustGravity(float adjustment)
+    {
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - adjustment);
+
     }
 
     //create floor with a block being created forward by set amount (the size of the floor) and put in a parentGroup list for organization

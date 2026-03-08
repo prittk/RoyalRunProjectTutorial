@@ -7,11 +7,16 @@ public class PlayerCollison : MonoBehaviour
     float coolDownTimer = 0f;
     [SerializeField] Animator animator;
 
-    
-
+    FloorGen FloorGen;
+    [SerializeField] float adjustSpeed = 2f;
     const string hitString = "Hit";//name of the animator trigger
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    void Start()
+    {
+        FloorGen = FindFirstObjectByType<FloorGen>();
+    }
+    
     void Update()
     {
         if ( coolDownTimer < collisionCooldown)
@@ -27,7 +32,9 @@ public class PlayerCollison : MonoBehaviour
         animator.SetTrigger(hitString); //Trigger the animator that is on player
         coolDownTimer = 0f;
         }
-        return;
-        
+
+        FloorGen.changeMoveSpeed(-adjustSpeed);
+
+        return;      
     }
 }

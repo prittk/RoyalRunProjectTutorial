@@ -620,6 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4a2afffd7ce2c4fbca7c66acb39536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1696989925}
+  adjustSpeed: 2
 --- !u!1 &725913694
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,6 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4a2afffd7ce2c4fbca7c66acb39536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  adjustSpeed: 2
 --- !u!4 &725913696
 Transform:
   m_ObjectHideFlags: 0
@@ -834,6 +838,8 @@ MonoBehaviour:
   floorAmount: 12
   floorParent: {fileID: 477579236}
   moveSpeed: 10
+  minMoveSpeed: 5
+  maxMoveSpeed: 20
 --- !u!4 &1392612826
 Transform:
   m_ObjectHideFlags: 0
@@ -852,6 +858,11 @@ Transform:
 --- !u!4 &1696989924 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6410221756858730007, guid: dcbc89efbe5bd174b99e07c76bd0b6bf, type: 3}
+  m_PrefabInstance: {fileID: 814383645}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1696989925 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1014860696115371117, guid: dcbc89efbe5bd174b99e07c76bd0b6bf, type: 3}
   m_PrefabInstance: {fileID: 814383645}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1752718609
