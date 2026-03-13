@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class FloorGen : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class FloorGen : MonoBehaviour
     int floorLength ; //the length of the floor for placing
 
     [SerializeField] Transform floorParent; //parent to keep all instantiated floors in a single object parent
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField]  float moveSpeed = 10f;
     [SerializeField] float minMoveSpeed = 5f;
     [SerializeField] float maxMoveSpeed = 15f;
 
@@ -34,7 +34,13 @@ public class FloorGen : MonoBehaviour
 
     public void changeMoveSpeed(float newSpeed)
     {
-        moveSpeed += newSpeed;
+       StartCoroutine(MoveSpeed(newSpeed));
+
+    }
+
+    IEnumerator MoveSpeed(float newSpeed)
+    {
+         moveSpeed += newSpeed;
         
         if (moveSpeed < minMoveSpeed)
         {
@@ -48,6 +54,11 @@ public class FloorGen : MonoBehaviour
         }
         adjustGravity(newSpeed);
 
+        yield return new WaitForSeconds(3f); //wait before revertingspeed
+        Debug.Log("Reverting speed change :" + moveSpeed);
+        moveSpeed -= newSpeed;
+        adjustGravity(newSpeed);
+        
     }
 
     public void adjustGravity(float adjustment)

@@ -6,6 +6,7 @@ public class CoinPickup : Pickup
     protected override void onPickUp()
     {
         Debug.Log("Player picked up a coin");    
+
     }
 
 
