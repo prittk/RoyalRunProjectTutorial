@@ -4,12 +4,13 @@ using System.Collections;
 
 public class FloorGen : MonoBehaviour
 {
+    [SerializeField] CameraController cameraController;
     [SerializeField] GameObject floorPrefab;
     [SerializeField] int floorAmount = 12;
     int floorLength ; //the length of the floor for placing
 
     [SerializeField] Transform floorParent; //parent to keep all instantiated floors in a single object parent
-    [SerializeField]  float moveSpeed = 10f;
+    [SerializeField] public float moveSpeed = 10f;
     [SerializeField] float minMoveSpeed = 5f;
     [SerializeField] float maxMoveSpeed = 15f;
 
@@ -35,11 +36,13 @@ public class FloorGen : MonoBehaviour
     public void changeMoveSpeed(float newSpeed)
     {
        StartCoroutine(MoveSpeed(newSpeed));
+       
 
     }
 
     IEnumerator MoveSpeed(float newSpeed)
     {
+        cameraController.changeCameraFov(newSpeed,1f);
          moveSpeed += newSpeed;
         
         if (moveSpeed < minMoveSpeed)
@@ -55,9 +58,18 @@ public class FloorGen : MonoBehaviour
         adjustGravity(newSpeed);
 
         yield return new WaitForSeconds(3f); //wait before revertingspeed
-        Debug.Log("Reverting speed change :" + moveSpeed);
         moveSpeed -= newSpeed;
-        adjustGravity(newSpeed);
+        adjustGravity(-newSpeed);
+        cameraController.changeCameraFov(-newSpeed,1f);
+
+        //  while(elapsedTime < duration)
+        // {
+        //     elapsedTime = Time.deltaTime;
+        //     percentage = elapsedTime/duration;
+        //     moveSpeed = Mathf.Lerp(startSpeed, newSpeed,percentage);
+        //     yield return null;
+        // }
+
         
     }
 
