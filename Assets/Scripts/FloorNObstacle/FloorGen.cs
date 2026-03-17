@@ -1,18 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEditor.EditorTools;
 
 public class FloorGen : MonoBehaviour
 {
+    [Header("Refences")]
     [SerializeField] CameraController cameraController;
     [SerializeField] GameObject floorPrefab;
     [SerializeField] int floorAmount = 12;
-    int floorLength ; //the length of the floor for placing
+    [Tooltip("Do not change chunck change unless it is the same as prefab tile")]
 
+    int floorLength ; //the length of the floor for placing
     [SerializeField] Transform floorParent; //parent to keep all instantiated floors in a single object parent
+
+    [Header("Min/Max Level Settings")]
+    [SerializeField] float deafultMoveSpeed = 10f;
+    [Tooltip("moveSpeed should be deault after boost ends")]
     [SerializeField] public float moveSpeed = 10f;
     [SerializeField] float minMoveSpeed = 5f;
     [SerializeField] float maxMoveSpeed = 15f;
+    [SerializeField] float minGravityZ = -22f;
+    [SerializeField] float maxGravityZ = -2f;
 
 
 
@@ -33,34 +42,40 @@ public class FloorGen : MonoBehaviour
     }
 
 
-    public void changeMoveSpeed(float newSpeed)
+    public void changeMoveSpeed(float speedChange)
     {
-       StartCoroutine(MoveSpeed(newSpeed));
+       StartCoroutine(MoveSpeed(speedChange));
        
 
     }
 
-    IEnumerator MoveSpeed(float newSpeed)
+    //Take new move speed and adjust settings based on move speed
+    IEnumerator MoveSpeed(float speedChange)
     {
-        cameraController.changeCameraFov(newSpeed,1f);
-         moveSpeed += newSpeed;
-        
-        if (moveSpeed < minMoveSpeed)
-        {
-            moveSpeed = minMoveSpeed;
-            newSpeed = 0f;
-        }
-        else if (moveSpeed > maxMoveSpeed)
-        {
-            moveSpeed = maxMoveSpeed;
-            newSpeed = 0f;
-        }
-        adjustGravity(newSpeed);
+        float newMoveSpeed = moveSpeed + speedChange;
+        newMoveSpeed = Mathf.Clamp(newMoveSpeed, minMoveSpeed, maxMoveSpeed);
 
-        yield return new WaitForSeconds(3f); //wait before revertingspeed
-        moveSpeed -= newSpeed;
-        adjustGravity(-newSpeed);
-        cameraController.changeCameraFov(-newSpeed,1f);
+        if (newMoveSpeed != moveSpeed)
+        {
+            cameraController.changeCameraFov(speedChange);
+
+            moveSpeed = newMoveSpeed;
+
+            adjustGravity(speedChange);
+            yield return new WaitForSeconds(3f); //wait before reverting speed/grav/cameria
+            
+            moveSpeed = deafultMoveSpeed;
+            adjustGravity(-speedChange);
+            cameraController.changeCameraFov(-speedChange);
+        }
+        else
+        {
+            yield return null;
+        }
+       
+        
+
+        
 
         //  while(elapsedTime < duration)
         // {
@@ -75,7 +90,10 @@ public class FloorGen : MonoBehaviour
 
     public void adjustGravity(float adjustment)
     {
-        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, Physics.gravity.z - adjustment);
+        float newGravity = Physics.gravity.z - adjustment;
+
+        Mathf.Clamp(newGravity,minGravityZ,maxGravityZ);
+        Physics.gravity = new Vector3(Physics.gravity.x, Physics.gravity.y, newGravity);
 
     }
 

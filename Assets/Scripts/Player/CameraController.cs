@@ -5,23 +5,30 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     CinemachineCamera cm;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem particleSystem; 
+
+    [Header("FOV Settings")]
     [SerializeField] float minFov = 40f;
     [SerializeField] float maxFov = 80f;
 
     [SerializeField] float zoomSpeedMod = 5;
+    [SerializeField] float zoomDuration = 1f;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         cm = GetComponent<CinemachineCamera>();
     }
-    public void changeCameraFov(float speed, float time)
+    public void changeCameraFov(float speed)
     {
-        StopAllCoroutines();
-        StartCoroutine(changeFOVRoutine(speed,time));
 
-        if (speed >= 1 && particleSystem.isStopped)
+        StopAllCoroutines();
+        StartCoroutine(changeFOVRoutine(speed));
+
+        if (speed >= 1 && particleSystem.isStopped )
         {
             particleSystem.Play();
         }
@@ -31,7 +38,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    IEnumerator changeFOVRoutine(float speed, float zoomDuration)
+    IEnumerator changeFOVRoutine(float speed)
     {
         float startFOV = cm.Lens.FieldOfView;
         float targetFov = Mathf.Clamp(startFOV+(speed*zoomSpeedMod),minFov,maxFov);

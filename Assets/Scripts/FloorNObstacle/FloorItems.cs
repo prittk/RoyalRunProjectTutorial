@@ -7,6 +7,7 @@ public class FloorItems : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] float[] lanes = {-4.5f, -1.25f, 2f}; //the x position of the lanes for spawning fences and obstacles
     List<int> usableLanes = new List<int>{0,1,2};
+    [Header("items to run into prefabs")]
     [SerializeField] GameObject fencePrefab;
 
     [SerializeField] GameObject applePrefab;
@@ -20,8 +21,6 @@ public class FloorItems : MonoBehaviour
         SpawnFences();
         SpawnApple();
         SpawnCoin();
-        
-      
 
     }
 
