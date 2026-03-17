@@ -3,10 +3,6 @@ using UnityEngine;
 public class CoinPickup : Pickup
 {
     ScoreManager scoreManager;
-    void Start()
-    {
-        scoreManager = FindAnyObjectByType<ScoreManager>();
-    }
 
     public void init(ScoreManager sg)
     {
