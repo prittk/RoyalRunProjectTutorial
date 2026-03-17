@@ -2,12 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEditor.EditorTools;
+using UnityEngine.PlayerLoop;
+using Unity.VisualScripting.FullSerializer;
+using Unity.VisualScripting;
 
 public class FloorGen : MonoBehaviour
 {
     [Header("Refences")]
     [SerializeField] CameraController cameraController;
     [SerializeField] GameObject floorPrefab;
+    [SerializeField] ScoreManager scoreManager;
     [SerializeField] int floorAmount = 12;
     [Tooltip("Do not change chunck change unless it is the same as prefab tile")]
 
@@ -22,7 +26,6 @@ public class FloorGen : MonoBehaviour
     [SerializeField] float maxMoveSpeed = 15f;
     [SerializeField] float minGravityZ = -22f;
     [SerializeField] float maxGravityZ = -2f;
-
 
 
     List<GameObject> floorList = new List<GameObject>();
@@ -40,6 +43,8 @@ public class FloorGen : MonoBehaviour
     {
         MoveFloor();
     }
+
+ 
 
 
     public void changeMoveSpeed(float speedChange)
@@ -101,13 +106,17 @@ public class FloorGen : MonoBehaviour
     private void GenerateFloor()
     {
         Vector3 newFloorPos; //new for the floor to be created at
-        GameObject floor;
+
         for (int i = floorList.Count; i<floorAmount; i++)
         {
             newFloorPos = CalculateNewFloorPos(); //calculate the new position based of previose
 
-            floor = Instantiate(floorPrefab, transform.position + newFloorPos, Quaternion.identity, floorParent);
-            floorList.Add(floor);
+            GameObject floorGO = Instantiate(floorPrefab, transform.position + newFloorPos, Quaternion.identity, floorParent);
+            floorList.Add(floorGO);
+
+            FloorItems floorItems = floorGO.GetComponent<FloorItems>();
+            floorItems.Init(this,scoreManager);
+            
  
         }
     }

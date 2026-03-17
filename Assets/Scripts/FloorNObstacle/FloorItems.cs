@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 
@@ -13,6 +15,9 @@ public class FloorItems : MonoBehaviour
     [SerializeField] GameObject applePrefab;
     [SerializeField] GameObject coinPrefab;
 
+    FloorGen floorGen;
+    ScoreManager scoreManager;
+
     
 
 
@@ -22,6 +27,12 @@ public class FloorItems : MonoBehaviour
         SpawnApple();
         SpawnCoin();
 
+    }
+
+    public void Init(FloorGen fg, ScoreManager sm)
+    {
+       this.floorGen = fg;
+       this.scoreManager = sm;
     }
 
     private void SpawnFences()
@@ -47,28 +58,46 @@ public class FloorItems : MonoBehaviour
     private void SpawnApple()
     {
         float spawnChance = .3f;
-        SpawnObject(applePrefab, spawnChance);
-    }
-    
-    private void SpawnCoin()
-    {
-       float spawnChance = .5f;
-       SpawnObject(coinPrefab, spawnChance);
-    }
-
-    private void SpawnObject(GameObject prefab, float spawnChance)
-    {
         if (usableLanes.Count <= 0 || Random.value > spawnChance) return;
 
         Vector3 spawnPos = CalculatePickupSpawn();
         int amountOfPickups = Random.Range(1,5);
         for (int i = 0; i < amountOfPickups; i++)
         {
-            Instantiate(prefab, spawnPos + new Vector3(0, 0, i), Quaternion.identity, this.transform); //spawn amount of pickups going forward
+            ApplePickup newApple = Instantiate(applePrefab, spawnPos + new Vector3(0, 0, i), Quaternion.identity, this.transform).GetComponent<ApplePickup>(); //spawn amount of pickups going forward
+            newApple.init(floorGen);
+        }
+    }
+    
+    private void SpawnCoin()
+    {
+        float spawnChance = .5f;
+        if (usableLanes.Count <= 0 || Random.value > spawnChance) return;
+
+        Vector3 spawnPos = CalculatePickupSpawn();
+        int amountOfPickups = Random.Range(1,5);
+        for (int i = 0; i < amountOfPickups; i++)
+        {
+            CoinPickup newCoin = Instantiate(coinPrefab, spawnPos + new Vector3(0, 0, i), Quaternion.identity, this.transform).GetComponent<CoinPickup>(); //spawn amount of pickups going forward
+            newCoin.init(scoreManager);
         }
 
-        return ;
     }
+
+    // private void SpawnObject(GameObject prefab, float spawnChance, GameObject gameObject)
+    // {
+    //     if (usableLanes.Count <= 0 || Random.value > spawnChance) return;
+
+    //     Vector3 spawnPos = CalculatePickupSpawn();
+    //     int amountOfPickups = Random.Range(1,5);
+    //     for (int i = 0; i < amountOfPickups; i++)
+    //     {
+    //         GameObject newObject = Instantiate(prefab, spawnPos + new Vector3(0, 0, i), Quaternion.identity, this.transform).GetComponent<CoinPickup>();; //spawn amount of pickups going forward
+    //         newObject.GetComponent<GameObject>.init(FloorGen);
+    //     }
+
+    //     return ;
+    // }
 
 
     private Vector3 CalculatePickupSpawn()

@@ -2,10 +2,21 @@ using UnityEngine;
 
 public class CoinPickup : Pickup
 {
+    ScoreManager scoreManager;
+    void Start()
+    {
+        scoreManager = FindAnyObjectByType<ScoreManager>();
+    }
+
+    public void init(ScoreManager sg)
+    {
+        scoreManager = sg;
+    }
 
     protected override void onPickUp()
     {
-        Debug.Log("Player picked up a coin");    
+        Debug.Log("Player picked up a coin");
+        scoreManager.SetScore(100);
 
     }
 

@@ -1,14 +1,16 @@
 using UnityEngine;
 
 
+
     
 public class ApplePickup : Pickup 
 {
     FloorGen FloorGen;
     [SerializeField] float adjustMoveSpeed = 1f;
-    void Start()
+
+    public void init(FloorGen fg)
     {
-        FloorGen = FindFirstObjectByType<FloorGen>();
+        FloorGen = fg;
     }
     
     protected override void onPickUp()
