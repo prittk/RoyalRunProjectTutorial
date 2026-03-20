@@ -13,6 +13,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4162792415460622945, guid: a2f5d8da70174eb428b2ccdb3528984b, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4162792415460622945, guid: a2f5d8da70174eb428b2ccdb3528984b, type: 3}
       propertyPath: m_LinearDamping
       value: 1
       objectReference: {fileID: 0}
