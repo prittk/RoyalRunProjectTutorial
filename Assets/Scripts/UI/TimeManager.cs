@@ -12,11 +12,16 @@ public class TimeManager : MonoBehaviour
     [SerializeField] float resetTimer = 5f;
 
     [SerializeField] PlayerController playerCont;
-    private bool isOver = false;
-
-    private float timeLeft = 0f;
+   
     [SerializeField] TMP_Text tmp;
     [SerializeField] GameObject gameOver;
+
+     private bool isOver = false;
+
+    private float timeLeft = 0f;
+
+    public bool IsOver=>isOver;
+    
  
     // Update is called once per frame
     void Start()
@@ -27,7 +32,7 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         if(isOver) return;
-        
+
         timeLeft -= Time.deltaTime;
 
         tmp.text = "00:00:"+timeLeft.ToString("F1");
@@ -46,12 +51,11 @@ public class TimeManager : MonoBehaviour
         gameOver.SetActive(true);
         Time.timeScale = .1f;//Slows down game while
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(resetTimer * Time.timeScale);//set resttimer to be in match with the slowdown
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        
-
-
     }
+
+    
 }

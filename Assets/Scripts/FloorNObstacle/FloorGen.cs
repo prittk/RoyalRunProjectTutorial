@@ -10,12 +10,12 @@ public class FloorGen : MonoBehaviour
 {
     [Header("Refences")]
     [SerializeField] CameraController cameraController;
-    [SerializeField] GameObject floorPrefab;
+    [SerializeField] GameObject[] floorPrefabs;
     [SerializeField] ScoreManager scoreManager;
-    [SerializeField] int floorAmount = 12;
-    [Tooltip("Do not change chunck change unless it is the same as prefab tile")]
+    [SerializeField] int floorAmount = 10;
+    [Tooltip("Do not change floorAmount unless it is the same as prefab tile size length")]
 
-    int floorLength ; //the length of the floor for placing
+    int floorLength = 10 ; //the length of the floor for placing
     [SerializeField] Transform floorParent; //parent to keep all instantiated floors in a single object parent
 
     [Header("Min/Max Level Settings")]
@@ -27,13 +27,17 @@ public class FloorGen : MonoBehaviour
     [SerializeField] float minGravityZ = -22f;
     [SerializeField] float maxGravityZ = -2f;
 
+    int floorsSpawned = 0;
+    [SerializeField] GameObject checkPointFloor;
+
+
 
     List<GameObject> floorList = new List<GameObject>();
 
 
     void Start()
     {
-        floorLength = (int)floorPrefab.transform.GetChild(0).Find("Floor").localScale.z; //get the length of the floor from the prefab Object->model->floor
+        //floorLength = (int)selectedChunk.transform.GetChild(0).Find("Floor").localScale.z; //get the length of the floor from the prefab Object->model->floor
         //floorLength = (int)floorPrefab.transform.Find("Model").Find("Floor").localScale.z; //redundant of the above but more readable
         //print("Floor Length: " + floorLength);
         GenerateFloor();
@@ -109,16 +113,35 @@ public class FloorGen : MonoBehaviour
 
         for (int i = floorList.Count; i<floorAmount; i++)
         {
-            newFloorPos = CalculateNewFloorPos(); //calculate the new position based of previose
+            GameObject floorGO;
 
-            GameObject floorGO = Instantiate(floorPrefab, transform.position + newFloorPos, Quaternion.identity, floorParent);
+            newFloorPos = CalculateNewFloorPos(); //calculate the new position based of previose
+           
+
+            floorGO= Instantiate(SelectedFloor(), transform.position + newFloorPos, Quaternion.identity,floorParent);
             floorList.Add(floorGO);
 
-            FloorItems floorItems = floorGO.GetComponent<FloorItems>();
-            floorItems.Init(this,scoreManager);
+            FloorItems floorItems = floorGO.GetComponent<FloorItems>();//Script on floorPrefab that controls Item spawn
+            floorItems.Init(this,scoreManager);//Intitialize scoreManager for score passing using only 1 manager thats created in this script
+
+            floorsSpawned++;
             
  
         }
+    }
+
+    private GameObject SelectedFloor()
+    {
+        GameObject selectedFloor;
+         if (floorsSpawned % floorAmount == 0 && floorsSpawned != 0)
+            {
+                selectedFloor = checkPointFloor;
+            }
+            else
+            {
+                selectedFloor = floorPrefabs[Random.Range(0,floorPrefabs.Length)];
+            }
+        return selectedFloor;
     }
 
 
