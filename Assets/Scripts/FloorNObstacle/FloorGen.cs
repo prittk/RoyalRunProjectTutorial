@@ -29,6 +29,8 @@ public class FloorGen : MonoBehaviour
 
     int floorsSpawned = 0;
     [SerializeField] GameObject checkPointFloor;
+    TimeManager timeManager;
+
 
 
 
@@ -37,7 +39,8 @@ public class FloorGen : MonoBehaviour
 
     void Start()
     {
-        //floorLength = (int)selectedChunk.transform.GetChild(0).Find("Floor").localScale.z; //get the length of the floor from the prefab Object->model->floor
+        
+        //floorLength = (int)s;electedChunk.transform.GetChild(0).Find("Floor").localScale.z; //get the length of the floor from the prefab Object->model->floor
         //floorLength = (int)floorPrefab.transform.Find("Model").Find("Floor").localScale.z; //redundant of the above but more readable
         //print("Floor Length: " + floorLength);
         GenerateFloor();

@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class TimeManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] float startTime = 10f;
-    [SerializeField] float resetTimer = 5f;
+    [SerializeField] float startTime = 15f;
+    [SerializeField] float resetTimer = 5f; //time to end the gameover screen
 
     [SerializeField] PlayerController playerCont;
    
@@ -31,13 +31,7 @@ public class TimeManager : MonoBehaviour
     }
     void Update()
     {
-        if(isOver) return;
-
-        timeLeft -= Time.deltaTime;
-
-        tmp.text = "00:00:"+timeLeft.ToString("F1");
-
-        if (timeLeft <= 0) StartCoroutine(GameOver());
+        decreaseTime();
        
     }
 
@@ -55,6 +49,22 @@ public class TimeManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+    }
+
+    public void increaseTime(float increase)
+    {
+        timeLeft += increase;
+    }
+
+    private void decreaseTime()
+    {
+        if(isOver) return;
+
+        timeLeft -= Time.deltaTime;
+
+        tmp.text = "00:00:"+timeLeft.ToString("F1");
+
+        if (timeLeft <= 0) StartCoroutine(GameOver());
     }
 
     
